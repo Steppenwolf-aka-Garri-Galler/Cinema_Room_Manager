@@ -8,40 +8,80 @@ public class cinemaRoomManager {
 
         System.out.println("Enter the number of seats in each row: ");
         int seats = scanner.nextInt();
-        int income;
+        int counter = 1; //because we don't need 0 here
 
+        System.out.println("Cinema:");
+        System.out.print(" ");
+        for( int m = 1; m <= seats; m++) {
+            System.out.print(" " + m);
+        }
+        System.out.println();   //here we printed first column of numbers 0f the cinema
+
+
+        String[][] matrix = new String[rows][seats+1];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j <= seats; j++) {
+                if (j == 0) {
+                    System.out.print(counter);
+                } else {
+                    matrix[i][j] = " S";
+                    System.out.print(matrix[i][j]);
+                }
+            }
+            System.out.println();
+            counter++;  //and here we printed everything according to rows and columns of the user's option
+
+        }
+        System.out.println();
+        System.out.println("Enter a row number:");
+        int userInput = scanner.nextInt();
+
+        System.out.println("Enter a seat number in that row:");
+        int userInput1 = scanner.nextInt();
+
+        
         if (rows * seats < 60) {
-            income = rows * seats * 10;
+            System.out.println("Ticket price: $" + 10);
         } else {
             if(rows % 2 == 0) {
-                int frontRows = rows / 2;
-                int backRows = rows / 2;
-                income = (frontRows * 10 * seats) + (backRows * 8 * seats);
-            } else {
-                int frontRows = ((rows - 1) / 2) * 10;
-                int backRows = ((rows + 1) / 2) * 8;
-                income = (frontRows * seats) + (backRows * seats);
-            }
-        }
-        System.out.println("Total income:$" + income);
-
-
-
-
-        /*
-        System.out.println("Cinema:");
-        System.out.println("  1 2 3 4 5 6 7 8");
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (j == 0)
-                    System.out.print(counter);
+                if (userInput < rows / 2)
+                    System.out.println("Ticket price: $" + 10);
                 else
-                    System.out.print(" S");
-            } //
-            System.out.println();
-            counter++;
+                    System.out.println("Ticket price: $" + 8);
 
-         }*/
+            } else {
+                if (userInput <= (rows - 1) / 2)
+                    System.out.println("Ticket price: $" + 10);
+                else
+                    System.out.println("Ticket price: $" + 8);
+            }
+        } //here we calculated the price of a ticket according to coordinates of the seat
+
+        System.out.println("Cinema:");
+        System.out.print(" ");
+        for( int m = 1; m <= seats; m++) {
+            System.out.print(" " + m);
+        }
+        System.out.println();
+
+        int counter1 = 1;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j <= seats; j++) {
+                if (j == 0) {
+                    System.out.print(counter1);
+                } else {
+                    if (userInput - 1 == i && userInput1 == j) {
+                        matrix[i][j] = " B";
+                        System.out.print(matrix[i][j]);
+                    } else {
+                        matrix[i][j] = " S";
+                        System.out.print(matrix[i][j]);
+                    }
+                }
+            }
+            System.out.println();
+            counter1++;
+        } //and finally we replaced the taken place by "B" sign and printed cinema structure one more time
     }
 }
 
